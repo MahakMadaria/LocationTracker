@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Tracker</title>
+</head>
+<body>
+    <button class="geo-btn">Show User Location</button>
+    <p class="showDetails">User Location Details</p>
+    <p class="fullAddress">User Address</p>
+    <p class="formattedAddress">User Address</p>
+
+    <script>
+        const showDetails = document.querySelector(".showDetails");
+
+        const getUserCurrentAddress = (latitude, longitude) => {
+            console.log(latitude);
+        }
+
+        document.querySelector('.geo-btn').addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        showDetails.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+                        getUserCurrentAddress(latitude, longitude);
+                    }, 
+                    (error) => {
+                        console.log(error.message);
+                    }
+                );
+            } else {
+                showDetails.textContent = "Geolocation is not supported by this browser.";
+            }
+        });
+    </script>
+</body>
+</html>
